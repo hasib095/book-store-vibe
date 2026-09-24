@@ -10,6 +10,11 @@ export type Book = {
   rating: number;
   category: string;
   tags: string[];
+  publisher:string;
+  totalPages:number;
+  yearOfPublishing:number;
+  review: string;
+
 };
 
 const BooksCard = ({ book }: { book: Book }) => {

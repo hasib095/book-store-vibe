@@ -1,4 +1,4 @@
-import BooksCard from "@/components/shared/BooksCard";
+import BooksCard, { type Book } from "@/components/shared/BooksCard";
 import React from "react";
 
 const getBooks = async (): Promise<Book[]> => {

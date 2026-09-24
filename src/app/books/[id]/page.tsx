@@ -1,3 +1,5 @@
+import ReadButton from "@/components/bookDetails/ReadButton";
+import WishListButton from "@/components/bookDetails/WishListButton";
 import { Book } from "@/components/shared/BooksCard";
 import Image from "next/image";
 import React from "react";
@@ -7,7 +9,6 @@ interface IBookDetailsPageProps {
     id: string;
   }>;
 }
-
 const getBooks = async (): Promise<Book[]> => {
   const res = await fetch("http://localhost:3000/booksData.json");
   const data: Book[] = await res.json();
@@ -58,14 +59,13 @@ const BookDetailsPage = async ({ params }: IBookDetailsPageProps) => {
 
           {/* Category */}
           <p className="text-sm font-medium text-gray-600">{book.category}</p>
-
+         <div className="my-5 border-t border-gray-200" />
           {/* Description */}
           <div className="mt-5">
-            <h3 className="font-semibold text-gray-900">Book Description</h3>
+            <h3 className="font-semibold text-gray-900">Review:</h3>
 
             <p className="mt-2 text-sm leading-6 text-gray-500">
-              Discover this amazing book and explore its story, characters,
-              ideas, and valuable insights.
+             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dignissimos possimus eligendi in iste adipisci ex atque ratione laboriosam quasi obcaecati harum incidunt dolores alias molestias culpa eveniet debitis iusto asperiores voluptas, dolore impedit voluptates laborum. Soluta, ad quos. Modi, velit quaerat facilis tenetur repellat consequuntur deserunt aspernatur temporibus quas nisi.
             </p>
           </div>
 
@@ -87,7 +87,31 @@ const BookDetailsPage = async ({ params }: IBookDetailsPageProps) => {
 
           <div className="my-5 border-t border-gray-200" />
 
+
+        {/* Number of pages */}
+          <div className="flex items-center gap-3">
+            <span className="text-sm text-gray-500">Number of pages :</span>
+
+            <span className="font-bold text-gray-900">{book.totalPages}</span>
+          </div>
+
           {/* Rating */}
+
+
+           {/* Publisher */}
+          <div className="flex items-center gap-3">
+            <span className="text-sm text-gray-500">Publisher:</span>
+
+            <span className="font-bold text-gray-900">{book.publisher}</span>
+          </div>
+
+           {/* year of publishing */}
+          <div className="flex items-center gap-3">
+            <span className="text-sm text-gray-500">Year Of Publishing:</span>
+
+            <span className="font-bold text-gray-900">{book.yearOfPublishing}</span>
+          </div>
+
           <div className="flex items-center gap-3">
             <span className="text-sm text-gray-500">Rating:</span>
 
@@ -95,14 +119,10 @@ const BookDetailsPage = async ({ params }: IBookDetailsPageProps) => {
           </div>
 
           {/* Buttons */}
-          <div className="mt-7 flex gap-3">
-            <button className="rounded-lg border border-gray-300 px-6 py-2.5 text-sm font-semibold text-gray-800 transition hover:bg-gray-100">
-              Read
-            </button>
 
-            <button className="rounded-lg bg-cyan-500 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-cyan-600">
-              Wishlist
-            </button>
+          <div className="mt-7 flex gap-3">
+            <ReadButton book={book} />
+            <WishListButton book={book}/>
           </div>
         </div>
       </div>
