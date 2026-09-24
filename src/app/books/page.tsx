@@ -1,5 +1,5 @@
+import BooksCard from "@/components/shared/BooksCard";
 import React from "react";
-import BooksCard, { type Book } from "../shared/BooksCard";
 
 const getBooks = async (): Promise<Book[]> => {
     const res = await fetch("http://localhost:3000/booksData.json");
@@ -13,7 +13,7 @@ const Books = async () => {
 
     return (
         <section className="container mx-auto my-[15px] ">
-            <h2 className="text-5xl font-bold text-center mb-6">Books</h2>
+            <h2 className="text-5xl font-bold text-center mb-6">All Books</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
                 {
                     booksdata.map((book) => (

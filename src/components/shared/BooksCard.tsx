@@ -1,4 +1,6 @@
+
 import Image from "next/image";
+import Link from "next/link";
 
 export type Book = {
   bookId: number;
@@ -12,62 +14,60 @@ export type Book = {
 
 const BooksCard = ({ book }: { book: Book }) => {
   return (
-    <div className="h-full">
-      <div className="w-full h-full max-w-[440px] rounded-2xl border border-gray-300 p-7 flex flex-col">
+    <div className="group overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+      
+      {/* Book Image */}
+      <div className="relative h-72 overflow-hidden bg-gray-100">
+        <Image
+          src={book.image}
+          alt={book.bookName}
+          fill
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
+        />
 
-        <div className="h-[270px] shrink-0 rounded-2xl bg-gray-100 flex items-center justify-center">
-          <Image
-            src={book.image}
-            alt={book.bookName}
-            width={300}
-            height={300}
-            className="h-[210px] w-[160px] object-contain"
-          />
+        {/* Category */}
+        <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-gray-700 shadow-sm backdrop-blur">
+          {book.category}
+        </span>
+
+        {/* Rating */}
+        <div className="absolute right-4 top-4 flex items-center gap-1 rounded-full bg-black/70 px-3 py-1 text-sm text-white backdrop-blur">
+          <span className="text-yellow-400">★</span>
+          {book.rating}
         </div>
+      </div>
 
-        
-        <div className="flex gap-3 mt-7 min-h-[42px]">
-          {book.tags.map((tag) => (
+      {/* Content */}
+      <div className="p-5">
+        <h2 className="line-clamp-1 text-xl font-bold text-gray-900 transition-colors group-hover:text-indigo-600">
+          {book.bookName}
+        </h2>
+
+        <p className="mt-1 text-sm text-gray-500">
+          by <span className="font-medium text-gray-700">{book.author}</span>
+        </p>
+
+        {/* Tags */}
+        <div className="mt-4 flex flex-wrap gap-2">
+          {book.tags.slice(0, 3).map((tag) => (
             <span
               key={tag}
-              className="rounded-full bg-green-50 px-5 py-2 text-green-600"
+              className="rounded-full bg-indigo-50 px-3 py-1 text-xs font-medium text-indigo-600"
             >
-              {tag}
+              #{tag}
             </span>
           ))}
         </div>
 
-        
-        <h2 className="mt-5 text-3xl font-bold font-serif min-h-[72px]">
-          {book.bookName}
-        </h2>
-
-        
-        <p className="mt-4 text-lg text-gray-700 min-h-[28px]">
-          By : {book.author}
-        </p>
-
-       
-        <div className="border-t border-dashed border-gray-300 my-5"></div>
-
-       
-        <div className="flex justify-between items-center text-lg mt-auto">
-          <span className="text-gray-700">
-            {book.category}
-          </span>
-
-          <div className="flex items-center gap-3">
-            <span>{book.rating.toFixed(2)}</span>
-
-            <span className="text-3xl text-gray-600">
-              ☆
-            </span>
-          </div>
-        </div>
-
+        <Link href={`/books/${book.bookId}`}>
+        <button className="mt-5 block w-[50%] mx-auto rounded-xl bg-gray-900 py-3 text-sm font-semibold text-white transition-all duration-300 hover:bg-indigo-600">
+  View Details →
+</button>
+        </Link>
       </div>
     </div>
   );
 };
 
 export default BooksCard;
+
