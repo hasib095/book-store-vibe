@@ -1,10 +1,10 @@
 import React from 'react';
 import logo from "@/assets/book.ico";
 import Image from 'next/image';
-
+//max-w-7xl
 const Navbar = () => {
     return (
-        <div className="navbar bg-base-100 shadow-sm">
+        <div className="navbar bg-base-100 shadow-sm container mx-auto ">
 
             <div className="navbar-start">
 
